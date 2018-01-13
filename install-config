@@ -1,0 +1,34 @@
+CodeIgniter 3.1.6.
+MariaDB 10.0.31.
+Apache2
+LinuxMint 18
+
+settear usuario y clave en application/config/database.php
+
+link para wombat -> http://localhost/crm/clientes/alta_form/extensionsip/codigoagente/uniqueid/numero
+
+create database telecrm;
+
+use telecrm;
+
+create table clientes(
+	id int(11) NOT NULL AUTO_INCREMENT,
+  nom varchar(128) NOT NULL,
+  direc varchar(128) NOT NULL,
+  localid varchar(128) NOT NULL,
+  codpostal varchar(18) NULL,
+  pcia varchar(128) NOT NULL,
+  tel1 varchar(128) NOT NULL,
+  tel2 varchar(128) NULL,
+  tel3 varchar(128) NULL,
+  email varchar(128) NULL,
+  agcod varchar(128) NOT NULL,
+	selReg int(3) NOT NULL,
+	selPub int(3) NOT NULL,
+  obsC text NULL,
+	selCalif int(3) NOT NULL,
+	fecha_registracion date,
+	uniqueid varchar(50) NOT NULL,
+	sipextension int(11) NOT NULL,
+  PRIMARY KEY (id)
+);
