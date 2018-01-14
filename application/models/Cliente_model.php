@@ -7,46 +7,71 @@ class Cliente_model extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
+        $this->load->dbutil();
+        $this->load->helper('file');
     }
 
-    function obtener_clientes()
+    function obtener_clientes_para_csv($data)// boton Descargar .csv
     {
+        if ($data['tel1'])
+        {
+            $this->db->where('tel1', $data['tel1']);
+        } elseif ($data['agcod'])
+        {
+            $this->db->where('agcod', $data['agcod']);
+        } elseif ($data['fecha_registracion'])
+        {
+            $date = explode('-', $data['fecha_registracion']);
+            $date[0] = trim($date[0]);
+            $date[1] = trim($date[1]);
+            $date[0] = explode('/', $date[0]);
+            $date[1] = explode('/', $date[1]);
+            $date[0] = array_reverse($date[0]);
+            $date[1] = array_reverse($date[1]);
+            $date[0] = implode('-', $date[0]);
+            $date[1] = implode('-', $date[1]);
+            $this->db->where('fecha_registracion >', $date[0]);
+            $this->db->where('fecha_registracion <', $date[1]);
+        }
         $result = $this->db->get('clientes');
-        return $result->result_array();
+        $csvData = $this->dbutil->csv_from_result($result);
+        write_file('/var/www/html/crm/application/download/csv_result.csv', $csvData);
     }
-    //ToDO:
-    //      1- funcion querydumptocsv
-    function obtener_clientes_por($data)
+
+    function obtener_clientes_por($data)// boton Buscar
     {
-        if ($data['tel1']) {
-          $this->db->where('tel1', $data['tel1']);
-        } elseif ($data['agcod']) {
-          $this->db->where('agcod', $data['agcod']);
-        } elseif ($data['fecha_registracion']) {
-          $date = explode('-', $data['fecha_registracion']);
-          $date[0] = trim($date[0]);
-          $date[1] = trim($date[1]);
-          $date[0] = explode('/', $date[0]);
-          $date[1] = explode('/', $date[1]);
-          $date[0] = array_reverse($date[0]);
-          $date[1] = array_reverse($date[1]);
-          $date[0] = implode('-', $date[0]);
-          $date[1] = implode('-', $date[1]);
-          $this->db->where('fecha_registracion >', $date[0]);
-          $this->db->where('fecha_registracion <', $date[1]);
+        if ($data['tel1'])
+        {
+            $this->db->where('tel1', $data['tel1']);
+        } elseif ($data['agcod'])
+        {
+            $this->db->where('agcod', $data['agcod']);
+        } elseif ($data['fecha_registracion'])
+        {
+            $date = explode('-', $data['fecha_registracion']);
+            $date[0] = trim($date[0]);
+            $date[1] = trim($date[1]);
+            $date[0] = explode('/', $date[0]);
+            $date[1] = explode('/', $date[1]);
+            $date[0] = array_reverse($date[0]);
+            $date[1] = array_reverse($date[1]);
+            $date[0] = implode('-', $date[0]);
+            $date[1] = implode('-', $date[1]);
+            $this->db->where('fecha_registracion >', $date[0]);
+            $this->db->where('fecha_registracion <', $date[1]);
         }
         $result = $this->db->get('clientes');
         return $result->result_array();
     }
 
-    function obtener_detalle_cliente($data)
+    function obtener_detalle_cliente($data) // boton + Info
     {
         $this->db->where('id', $data);
         $result = $this->db->get('clientes');
         return $result->result_array();
     }
 
-    function guardar_cliente($data)
+    function guardar_cliente($data) // boton Guardar y ready!
     {
         $this->db->insert(
           'clientes',
@@ -72,7 +97,7 @@ class Cliente_model extends CI_Model {
         );
     }
 
-    function actualizar_cliente($data)
+    function actualizar_cliente($data) // boton Actualizar
     {
         $this->db->where('id', $data['id']);
         $this->db->update(

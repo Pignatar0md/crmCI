@@ -4,18 +4,19 @@ $(function() {
   setTimeout(function () {
     $("#mensaje").html("");
   }, 6000);
-  $('input[name="daterange"]').daterangepicker({
+  $('input[name="rango_fecha"]').daterangepicker({
     autoUpdateInput: false,
     locale: {
-      cancelLabel: 'Clear',
+      applyLabel: 'Aplicar',
+      cancelLabel: 'Limpiar',
       format: 'DD/MM/YYYY'
     }
   });
-  $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+  $('input[name="rango_fecha"]').on('apply.daterangepicker', function(ev, picker) {
      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
    });
 
-   $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+   $('input[name="rango_fecha"]').on('cancel.daterangepicker', function(ev, picker) {
      $(this).val('');
    });
   tablaDetClientes = $('#listaDetalleClientes').DataTable({
@@ -165,7 +166,7 @@ $(function() {
             }
 
             jsonMsj.lista_clientes_por[i].acciones = "<button type='button' class='btn btn-xs btn-primary ver' data-toggle='modal' data-target='#myModal2' value=" + jsonMsj.lista_clientes_por[i].id + ">+ info</button>&nbsp;"+
-            "<a type='button' class='btn btn-xs btn-primary' href=clientes/editar_cliente?id=" + jsonMsj.lista_clientes_por[i].id + ">Editar</button></a>";
+            "<a type='button' class='btn btn-xs btn-primary' href=index.php/clientes/editar_cliente?id=" + jsonMsj.lista_clientes_por[i].id + ">Editar</button></a>";
             arrCliente[i] = [
               jsonMsj.lista_clientes_por[i].nom,
               jsonMsj.lista_clientes_por[i].direc,
@@ -179,18 +180,12 @@ $(function() {
           }
         }
         tablaClientes.rows().remove().draw();
-        console.log(jsonMsj.lista_clientes_por);
         tablaClientes.rows.add(arrCliente).draw();
         arrCliente = null;
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log("Error al ejecutar => " + jqXHR + " - " + errorThrown);
       }
-    });
-  });
-  $("#btnGetCsv").click(function () {
-    $.ajax({
-
     });
   });
   $("#selCalif").change(function () {

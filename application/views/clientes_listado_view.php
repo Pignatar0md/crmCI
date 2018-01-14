@@ -46,24 +46,23 @@ $header;
 								</div>
 						</div>
 						<div class="row-fluid">
-							  <div class="col-md-10 col-md-offset-1">
-									<div class="col-md-3">
-								    <!-- <select class="form-control" id="agente">
-											<option value="" selected disabled>Seleccione agente</option>
-								    </select> -->
-										<input type="text" class="form-control" id="agente" name="agente" placeholder="nro. agente"/>
-									</div>
-									<div class="col-md-3">
-										<input type="text" class="form-control" id="tel1" name="Teléfono" placeholder="telefono"/>
-									</div>
-									<div class="col-md-3">
-										<input type="text" id="rango_fecha" class="form-control" name="daterange" placeholder="rango fecha de alta" />
-									</div>
-									<div class="col-md-3">
-									  <button type="button" class="btn btn-sm btn-warning" id="btnSearch">Buscar</button>
-										<!-- <input type="submit" value="blabal"/> -->
-									  <button type="button" class="btn btn-sm btn-warning" id="btnGetCsv">Descargar .csv</button>
-									</div>
+							  <?= form_open('clientes/get_csv') ?>
+                <div class="col-md-10 col-md-offset-1">
+										<div class="col-md-3">
+									      <input type="text" class="form-control" id="agente" name="agente" placeholder="nro. agente"/>
+										</div>
+										<div class="col-md-3">
+											  <input type="text" class="form-control" id="tel1" name="tel1" placeholder="telefono"/>
+										</div>
+										<div class="col-md-3">
+											  <input type="text" id="rango_fecha" class="form-control" name="rango_fecha" placeholder="rango fecha de alta" />
+										</div>
+										<div class="col-md-3">
+										    <button type="button" class="btn btn-sm btn-warning" id="btnSearch">Buscar</button>
+										    <input type="submit" class="btn btn-sm btn-warning" value="Descargar .csv" id="btnGetCsv" />
+										</div>
+                </div>
+							  </form>
 						</div>
 					  <div class="row-fluid">
 
@@ -85,41 +84,41 @@ $header;
 												<tbody>
 													  <?php foreach ($lista_clientes as $cliente): ?>
 														<tr>
-															<td><?= $cliente['nom'] ?></td>
-															<td><?= $cliente['direc'] ?></td>
-															<td><?= $cliente['localid'] ?></td>
-															<td><?= $cliente['pcia'] ?></td>
-															<td><?= $cliente['tel1'] ?></td>
-															<td><?= $cliente['email'] ?></td>
-															<td>
-																  <?php
-																  switch ($cliente['selCalif']) {
-																	    case 1:
-																		      echo "No califico!";
-																		      break;
+																<td><?= $cliente['nom'] ?></td>
+																<td><?= $cliente['direc'] ?></td>
+																<td><?= $cliente['localid'] ?></td>
+																<td><?= $cliente['pcia'] ?></td>
+																<td><?= $cliente['tel1'] ?></td>
+																<td><?= $cliente['email'] ?></td>
+																<td>
+																	  <?php
+																	  switch ($cliente['selCalif']) {
+																		    case 1:
+																			      echo "No califico!";
+																			      break;
 
-																			case 2:
-																				  echo "Fuera de zona";
-																				  break;
+																				case 2:
+																					  echo "Fuera de zona";
+																					  break;
 
-																			case 3:
-																			    echo "No venta";
-																			    break;
+																				case 3:
+																				    echo "No venta";
+																				    break;
 
-																			case 4:
-																			    echo "UHF";
-																			    break;
+																				case 4:
+																				    echo "UHF";
+																				    break;
 
-																			case 5:
-																				  echo "Venta";
-																				  break;
-																  }
-																  ?>
-															</td>
-															<td>
-																  <button type="button" class="btn btn-sm btn-primary ver" data-toggle="modal" data-target="#myModal2" value="<?= $cliente['id'] ?>">+ info</button>
-																  <a type="button" class="btn btn-sm btn-primary" href="editar_cliente?id=<?= $cliente['id'] ?>">Editar</button></a>
-															</td>
+																				case 5:
+																					  echo "Venta";
+																					  break;
+																	  }
+																	  ?>
+																</td>
+																<td>
+																	  <button type="button" class="btn btn-sm btn-primary ver" data-toggle="modal" data-target="#myModal2" value="<?= $cliente['id'] ?>">+ info</button>
+																	  <a type="button" class="btn btn-sm btn-primary" href="editar_cliente?id=<?= $cliente['id'] ?>">Editar</button></a>
+																</td>
 														</tr>
 													<?php endforeach; ?>
 												</tbody>
