@@ -3,9 +3,11 @@ MariaDB 10.0.31.
 Apache2
 LinuxMint 18
 
-settear usuario y clave en application/config/database.php
+1- settear usuario y clave en application/config/database.php
 
-link para wombat -> http://localhost/crm/clientes/alta_form/extensionsip/codigoagente/uniqueid/numero
+2- link para wombat -> http://localhost/crm/clientes/alta_form/extensionsip/codigoagente/uniqueid/numero
+
+3- Base de datos:
 
 create database telecrm;
 
@@ -32,3 +34,10 @@ create table clientes(
 	sipextension int(11) NOT NULL,
   PRIMARY KEY (id)
 );
+
+4- permisos y owners:
+
+chown asterisk.asterisk -R /var/www/html/crm/application/download/
+chmod 777 -R /var/www/html/crm/application/download/
+
+5- settear las constantes en /var/www/html/crm/application/helpers/pauses_helper.php
