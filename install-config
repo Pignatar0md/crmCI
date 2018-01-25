@@ -34,10 +34,17 @@ create table clientes(
 	sipextension int(11) NOT NULL,
   PRIMARY KEY (id)
 );
-
 4- permisos y owners:
 
 chown asterisk.asterisk -R /var/www/html/crm/application/download/
 chmod 777 -R /var/www/html/crm/application/download/
 
 5- settear las constantes en /var/www/html/crm/application/helpers/pauses_helper.php
+
+CREATE TABLE IF NOT EXISTS user_login (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  user_name varchar(255) NOT NULL,
+  user_email varchar(255) NOT NULL,
+  user_password varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+);
