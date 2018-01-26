@@ -3,12 +3,12 @@ if (isset($this->session->userdata['logged_in']))
 {
     header("location: http://localhost/crm/index.php/login/user_login_process");
 }
-if (isset($logout_message))
-{
-    echo "<div class='message'>";
-    echo $logout_message;
-    echo "</div>";
-}
+// if (isset($logout_message))
+// {
+//     echo "<div class='message'>";
+//     echo $logout_message;
+//     echo "</div>";
+// }
 if (isset($message_display))
 {
     echo "<div class='message'>";
