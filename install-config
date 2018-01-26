@@ -48,3 +48,5 @@ CREATE TABLE IF NOT EXISTS user_login (
   user_password varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
+
+insert into user_login(user_name, user_email, user_password) values('sysadmin', 'admins@gmail.com', 'sysadm123');
