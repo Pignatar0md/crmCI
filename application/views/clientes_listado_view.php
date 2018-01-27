@@ -1,5 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+if (!isset($this->session->userdata['logged_in']))
+{
+    header("location: login/user_login_process");
+}
 $header;
 ?>
 				<div class="container'fluid">

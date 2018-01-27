@@ -1,7 +1,7 @@
 <?php
 if (isset($this->session->userdata['logged_in']))
 {
-    header("location: http://localhost/crm/index.php/login/user_login_process");
+    header("location: index.php/clientes");
 }
 // if (isset($logout_message))
 // {
