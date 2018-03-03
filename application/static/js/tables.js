@@ -12,6 +12,36 @@ $(function() {
       format: 'DD/MM/YYYY'
     }
   });
+  $("#makeTransfer").click(function () {
+    if ($("#numToTransf").val()) {
+      if ($.isNumeric($("#numToTransf").val())) {
+        $.ajax({
+          type: "POST",
+          dataType: "text",
+          data: {"number": $("#numToTransf").val()},
+          url: '/crm/index.php/clientes/transferir',
+          success: function (msg) {
+            $("#message").html("");
+            $("#transferModal").modal('hide');
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+              console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+          }
+        });
+      } else {
+        $("#message").html("Ingrese un valor numerico");
+      }
+    } else {
+      $("#message").html("Ingrese una extension");
+    }
+  });
+  $("#selCalif").on("change", function (e) {
+    if(e.value === "6") {
+      debugger;
+      $("#nombre").attr("required", false);
+      $("#localidad").attr("required", false);
+    }
+  });
   $('input[name="rango_fecha"]').on('apply.daterangepicker', function(ev, picker) {
      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
    });
