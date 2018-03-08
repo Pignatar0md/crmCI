@@ -166,7 +166,7 @@ $(function() {
             }
 
             jsonMsj.lista_clientes_por[i].acciones = "<button type='button' class='btn btn-xs btn-primary ver' data-toggle='modal' data-target='#myModal2' value=" + jsonMsj.lista_clientes_por[i].id + ">+ info</button>&nbsp;"+
-            "<a type='button' class='btn btn-xs btn-primary' href=index.php/clientes/editar_cliente?id=" + jsonMsj.lista_clientes_por[i].id + ">Editar</button></a>";
+            "<a type='button' class='btn btn-xs btn-primary' href=../clientes/editar_cliente?id=" + jsonMsj.lista_clientes_por[i].id + ">Editar</button></a>";
             arrCliente[i] = [
               jsonMsj.lista_clientes_por[i].nom,
               jsonMsj.lista_clientes_por[i].direc,
