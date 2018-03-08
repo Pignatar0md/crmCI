@@ -48,12 +48,6 @@ function auto_unpause($arrData)//********************************** Funcion Auto
 }
 
 function transfer($arrData) {//************************************ Funcion para transferir llamadas
-
-  $asm = new AGI_AsteriskManager();
-  $res = $asm->connect(IP_AMI, USER_AMI, PASS_AMI);
-
-  if ($res == TRUE) {
-  // Aca va tu codigo RODRICOM
-  }
+    shell_exec("./var/lib/asterisk/agi-bin/transfer.sh " . $arrData['exten'] . " " .$arrData['toExten']);
 }
 ?>

@@ -130,8 +130,9 @@ class Clientes extends CI_Controller {
 	}
 
 	public function transferir() {
-		  $data["transfTo"] = $this->input->post("number");
-	    transfer($data['transfTo']);
+		  $data["toExten"] = $this->input->post("number");
+			$data["exten"] = $this->input->post("exten");
+	    transfer($data);
 	}
 
 }

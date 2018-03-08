@@ -18,7 +18,7 @@ $(function() {
         $.ajax({
           type: "POST",
           dataType: "text",
-          data: {"number": $("#numToTransf").val()},
+          data: {"number": $("#numToTransf").val(), "exten": $("input[name=sipext]").val()},
           url: '/crm/index.php/clientes/transferir',
           success: function (msg) {
             $("#message").html("");
@@ -37,7 +37,6 @@ $(function() {
   });
   $("#selCalif").on("change", function (e) {
     if(e.value === "6") {
-      debugger;
       $("#nombre").attr("required", false);
       $("#localidad").attr("required", false);
     }
@@ -97,7 +96,7 @@ $(function() {
     $.ajax({
       type: 'GET',
       contentType: "application/json",
-      url: 'index.php/clientes/get_detalle_cliente?id=' + cliente_id,
+      url: '/crm/index.php/clientes/get_detalle_cliente?id=' + cliente_id,
       success: function (msg) {
         jsonMsj = JSON.parse(msg);
         if(jsonMsj.lista_detalle_cliente.length > 0) {
@@ -172,7 +171,7 @@ $(function() {
     $.ajax({
       type: 'GET',
       contentType: "application/json",
-      url: 'index.php/clientes/get_clientes_por?tel1=' + $("#tel1").val() +'&agente=' + $("#agente").val() + '&rango_fecha=' + $("#rango_fecha").val(),
+      url: '/crm/index.php/clientes/get_clientes_por?tel1=' + $("#tel1").val() +'&agente=' + $("#agente").val() + '&rango_fecha=' + $("#rango_fecha").val(),
       success: function (msg) {
         jsonMsj = JSON.parse(msg);
         for (var i = 0; i < jsonMsj.lista_clientes_por.length; i++) {
