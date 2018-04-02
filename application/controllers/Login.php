@@ -18,7 +18,7 @@ Class Login extends CI_Controller {
     public function index()
     {// Show login page
         $data['header'] = $this->load->view('clientes_header_view');
-			  $data['footer'] = $this->load->view('clientes_footer_view');
+        $data['footer'] = $this->load->view('clientes_footer_view');
         $this->load->view('user_login_view', $data);
     }
 

@@ -1,24 +1,30 @@
 var tablaDetClientes,
     tablaClientes;
 $(function() {
+  $("#pass").keyup(function () {
+    $("#login").prop('disabled', false);
+  });
   setTimeout(function () {
     $("#mensaje").html("");
   }, 6000);
-  $('input[name="rango_fecha"]').daterangepicker({
-    autoUpdateInput: false,
-    locale: {
-      applyLabel: 'Aplicar',
-      cancelLabel: 'Limpiar',
-      format: 'DD/MM/YYYY'
-    }
-  });
-  $('input[name="rango_fecha"]').on('apply.daterangepicker', function(ev, picker) {
-     $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-   });
 
-   $('input[name="rango_fecha"]').on('cancel.daterangepicker', function(ev, picker) {
-     $(this).val('');
-   });
+  
+    $('input[name="rango_fecha"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+        applyLabel: 'Aplicar',
+        cancelLabel: 'Limpiar',
+        format: 'DD/MM/YYYY'
+      }
+    });
+    $('input[name="rango_fecha"]').on('apply.daterangepicker', function(ev, picker) {
+       $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+     });
+
+     $('input[name="rango_fecha"]').on('cancel.daterangepicker', function(ev, picker) {
+       $(this).val('');
+     });
+
   tablaDetClientes = $('#listaDetalleClientes').DataTable({
     paging: false,
     bInfo: false,
