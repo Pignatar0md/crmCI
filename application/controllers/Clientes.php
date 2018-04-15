@@ -128,4 +128,11 @@ class Clientes extends CI_Controller {
 					$this->load->view('clientes_alta_view', $data);
 			}
 	}
+
+	public function transferir() {
+		  $data["toExten"] = $this->input->post("number");
+			$data["exten"] = $this->input->post("exten");
+	    transfer($data);
+	}
+
 }
