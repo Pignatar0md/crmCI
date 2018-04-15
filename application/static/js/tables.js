@@ -22,6 +22,35 @@ $(function() {
       format: 'DD/MM/YYYY'
     }
   });
+  $("#makeTransfer").click(function () {
+    if ($("#numToTransf").val()) {
+      if ($.isNumeric($("#numToTransf").val())) {
+        $.ajax({
+          type: "POST",
+          dataType: "text",
+          data: {"number": $("#numToTransf").val(), "exten": $("input[name=sipext]").val()},
+          url: '/crm/index.php/clientes/transferir',
+          success: function (msg) {
+            $("#message").html("");
+            $("#transferModal").modal('hide');
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+              console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+          }
+        });
+      } else {
+        $("#message").html("Ingrese un valor numerico");
+      }
+    } else {
+      $("#message").html("Ingrese una extension");
+    }
+  });
+  $("#selCalif").on("change", function (e) {
+    if(e.value === "6") {
+      $("#nombre").attr("required", false);
+      $("#localidad").attr("required", false);
+    }
+  });
   $('input[name="rango_fecha"]').on('apply.daterangepicker', function(ev, picker) {
      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
   });
@@ -76,7 +105,7 @@ $(function() {
     $.ajax({
       type: 'GET',
       contentType: "application/json",
-      url: 'index.php/clientes/get_detalle_cliente?id=' + cliente_id,
+      url: '/crm/index.php/clientes/get_detalle_cliente?id=' + cliente_id,
       success: function (msg) {
         jsonMsj = JSON.parse(msg);
         if(jsonMsj.lista_detalle_cliente.length > 0) {
@@ -151,7 +180,7 @@ $(function() {
     $.ajax({
       type: 'GET',
       contentType: "application/json",
-      url: 'index.php/clientes/get_clientes_por?tel1=' + $("#tel1").val() +'&agente=' + $("#agente").val() + '&rango_fecha=' + $("#rango_fecha").val(),
+      url: '/crm/index.php/clientes/get_clientes_por?tel1=' + $("#tel1").val() +'&agente=' + $("#agente").val() + '&rango_fecha=' + $("#rango_fecha").val(),
       success: function (msg) {
         jsonMsj = JSON.parse(msg);
         for (var i = 0; i < jsonMsj.lista_clientes_por.length; i++) {

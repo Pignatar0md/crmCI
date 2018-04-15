@@ -3,12 +3,13 @@
     <?php
 
     echo form_open('clientes/save_form');
-    $nombre = array("name" => "nom", "class" => "form-control input-sm",  "placeholder" => "Nombre Apellido");
+    $nombre = array("id" => "nombre", "name" => "nom", "class" => "form-control input-sm",  "placeholder" => "Nombre Apellido", "required" => "required");
     $direc = array("name" => "direc", "class" => "form-control input-sm", "placeholder" => "direccion");
-    $localid = array("name" => "localid", "class" => "form-control input-sm", "placeholder" => "localidad");
+    $localid = array("id" => "localidad", "name" => "localid", "class" => "form-control input-sm", "placeholder" => "localidad", "required" => "required");
     $codpostal = array("name" => "codpostal", "class" => "form-control input-sm", "placeholder" => "cod.postal");
     $prov = array("name" => "pcia", "class" => "form-control input-sm", "placeholder" => "provincia");
     $tel1 = array("name" => "tel1", "class" => "form-control input-sm", "readonly" => "true", "placeholder" => "telefono", "value" => $numero);
+    $btnTransf = array("id" => "transfer", "name" => "button", "class" => "btn btn-warning btn-sm", "type" => "button", "data-toggle" => "modal", "data-target" => "#transferModal");
     $tel2 = array("name" => "tel2", "class" => "form-control input-sm", "placeholder" => "telefono alternativo");
     $tel3 = array("name" => "tel3", "class" => "form-control input-sm", "placeholder" => "telefono móvil");
     $email = array("name" => "email", "class" => "form-control input-sm", "placeholder" => "direccion de e-mail");
@@ -67,19 +68,24 @@
             </div>
             <div class="row-fluid">
                 <div class="form-group">
-                    <div class="col-md-3"><br>
+                    <div class="col-md-2"><br>
                         <?= form_label('Teléfono', 'tel1') ?>
                         <?= form_input($tel1) ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3"><br>
+                    <div class="col-md-1"><br><br>
+                        <?= form_button($btnTransf, "Transferir") ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"><br>
                         <?= form_label('Teléfono alternativo', 'tel2') ?>
                         <?= form_input($tel2) ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3"><br>
+                    <div class="col-md-2"><br>
                         <?= form_label('Teléfono móvil', 'tel3') ?>
                         <?= form_input($tel3) ?>
                     </div>
@@ -107,6 +113,25 @@
                           $region
                         )
                         ?>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="transferModal" role="dialog" data-backdrop="static" data-keyboard="false">
+                      <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Transferir llamada</h4>
+                            </div>
+                            <div class="modal-body">
+                              <input type="text" id="numToTransf" placeholder="interno a transferir" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                              <label id="message"></label>
+                              <button id="makeTransfer" type="button" class="btn btn-warning">Ok</button>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -163,7 +188,9 @@
                         2 => "Fuera de zona",
                         3 => "No venta",
                         4 => "UHF",
-                        5 => "Venta"
+                        5 => "Venta",
+                        6 => "Se corto",
+                        7 => "Transferida"
                       ),
                       "",
                       $selCombo

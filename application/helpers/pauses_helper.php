@@ -46,4 +46,8 @@ function auto_unpause($arrData)//********************************** Funcion Auto
         );
     }
 }
+
+function transfer($arrData) {//************************************ Funcion para transferir llamadas
+    shell_exec("./var/lib/asterisk/agi-bin/transfer.sh " . $arrData['exten'] . " " .$arrData['toExten']);
+}
 ?>
