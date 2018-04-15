@@ -4,7 +4,16 @@ $(function() {
   setTimeout(function () {
     $("#mensaje").html("");
   }, 6000);
+
+  var start = moment();
+  var end = moment();
+
+  function cb(start, end) {
+    $('input[name="rango_fecha"]').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+  }
   $('input[name="rango_fecha"]').daterangepicker({
+    startDate: start,
+    endDate: end,
     autoUpdateInput: false,
     locale: {
       applyLabel: 'Aplicar',
@@ -19,6 +28,7 @@ $(function() {
    $('input[name="rango_fecha"]').on('cancel.daterangepicker', function(ev, picker) {
      $(this).val('');
    });
+   cb(start, end);
   tablaDetClientes = $('#listaDetalleClientes').DataTable({
     paging: false,
     bInfo: false,

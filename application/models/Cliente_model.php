@@ -30,8 +30,15 @@ class Cliente_model extends CI_Model {
             $date[1] = array_reverse($date[1]);
             $date[0] = implode('-', $date[0]);
             $date[1] = implode('-', $date[1]);
-            $this->db->where('fecha_registracion >', $date[0]);
-            $this->db->where('fecha_registracion <', $date[1]);
+            if ($date[0] == $date[1])
+            {
+                $this->db->where('fecha_registracion', $date[0]);
+            }
+            else
+            {
+                $this->db->where('fecha_registracion >', $date[0]);
+                $this->db->where('fecha_registracion <', $date[1]);
+            }
         }
         $result = $this->db->get('clientes');
         $csvData = $this->dbutil->csv_from_result($result);
