@@ -11,6 +11,7 @@ $(function() {
   function cb(start, end) {
     $('input[name="rango_fecha"]').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
   }
+  cb(start, end);
   $('input[name="rango_fecha"]').daterangepicker({
     startDate: start,
     endDate: end,
@@ -23,12 +24,10 @@ $(function() {
   });
   $('input[name="rango_fecha"]').on('apply.daterangepicker', function(ev, picker) {
      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-   });
-
-   $('input[name="rango_fecha"]').on('cancel.daterangepicker', function(ev, picker) {
+  });
+  $('input[name="rango_fecha"]').on('cancel.daterangepicker', function(ev, picker) {
      $(this).val('');
-   });
-   cb(start, end);
+  });
   tablaDetClientes = $('#listaDetalleClientes').DataTable({
     paging: false,
     bInfo: false,
